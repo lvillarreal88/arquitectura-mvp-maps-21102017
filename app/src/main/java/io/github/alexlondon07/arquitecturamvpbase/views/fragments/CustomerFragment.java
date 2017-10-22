@@ -9,17 +9,21 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import io.github.alexlondon07.arquitecturamvpbase.R;
+import io.github.alexlondon07.arquitecturamvpbase.helper.Constants;
 import io.github.alexlondon07.arquitecturamvpbase.model.Customer;
 import io.github.alexlondon07.arquitecturamvpbase.presenter.CustomerPresenter;
 import io.github.alexlondon07.arquitecturamvpbase.repository.CustomerRepository;
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.CustomerActivity;
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.CustomerCreateActivity;
 import io.github.alexlondon07.arquitecturamvpbase.views.activities.ICustomerView;
+import io.github.alexlondon07.arquitecturamvpbase.views.activities.MapsActivity;
 import io.github.alexlondon07.arquitecturamvpbase.views.adapter.CustomerAdapter;
 
 /**
@@ -125,5 +129,17 @@ public class CustomerFragment extends BaseFragment<CustomerPresenter> implements
     public void callAdapter(final ArrayList<Customer> customerArrayList){
         customerAdapter = new CustomerAdapter(getActivity(), R.id.customer_list_view, customerArrayList);
         customerList.setAdapter(customerAdapter);
+
+        customerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Toast.makeText(getBaseActivity(), ":: SHOW MAPS ::", Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(getBaseActivity(), MapsActivity.class);
+                intent.putExtra(Constants.ITEM_PHONELIST, customerArrayList.get(position).getPhoneList());
+                startActivity(intent);
+            }
+        });
+
     }
 }

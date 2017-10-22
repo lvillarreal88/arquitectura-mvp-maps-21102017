@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -102,5 +103,19 @@ public class CustomerActivity extends BaseActivity<CustomerPresenter> implements
     public void callAdapter(final ArrayList<Customer> customerArrayList){
         customerAdapter = new CustomerAdapter(this, R.id.customer_list_view, customerArrayList);
         customerList.setAdapter(customerAdapter);
+
+
+
+        //Method go to ProductUpdateActivity and Update Product
+        customerList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(CustomerActivity.this, MapsActivity.class);
+                intent.putExtra(Constants.ITEM_PRODUCT,customerArrayList.get(position));
+                startActivity(intent);
+                return true;
+            }
+        });
+
     }
 }

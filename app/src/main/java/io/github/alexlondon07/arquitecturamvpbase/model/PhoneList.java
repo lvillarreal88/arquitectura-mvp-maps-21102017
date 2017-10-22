@@ -21,6 +21,11 @@ public class PhoneList implements Serializable{
     @Expose
     private Location location;
 
+
+    @SerializedName("description")
+    @Expose
+    private String description;
+
     public String getNumber() {
         return number;
     }
@@ -36,4 +41,8 @@ public class PhoneList implements Serializable{
     public void setLocation(Location location) {
         this.location = location;
     }
+
+    public String getDescription() {return description;}
+
+    public void setDescription(String description) {this.description = description;}
 }

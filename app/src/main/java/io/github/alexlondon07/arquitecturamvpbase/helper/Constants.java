@@ -26,4 +26,5 @@ public class Constants {
     public static final String EMPTY = "";
 
 
+    public static final String ITEM_PHONELIST = "PHONELIST";
 }
